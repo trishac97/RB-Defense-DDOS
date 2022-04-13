@@ -2,14 +2,15 @@ package com.simulation.controller;
 
 import java.util.Random;
 
-public class ExcessV3 {
+public class ExcessV5{
 public static void main(String[] args) {
 	
 	
 	//Initialization parameters
 	int x = 0;					//Number of request seen in a window (s_x)
-	int numGood = 50000;		//Truly Good
-	int numBad = 50000;			//Truly Bad
+	int numGood = 0;			//Truly Good
+	int numBad = 0;				//Truly Bad
+	int totalGoodBad = 100000000;	//Total population
 	int classGood = 0;			//Classified good request
 	int classBad = 0;			//Classified good request
 	float e = (float) 0.1;      //Epsilon of ML black-box
@@ -20,20 +21,28 @@ public static void main(String[] args) {
 	float badCost = 0;			//Bad Cost
 	
 	
-	for(int y = 1; y<numGood+numBad;y++) {
+	for(int y = 1; y<totalGoodBad;y++) {
 		//Incoming new request, increment x by 1
 		x+=1;
-		
+		boolean flag = true;
 		//Classifier
-		int verdict = rand.nextInt(10)+1;
+		int verdictGroundTruth = rand.nextInt(9)+1;
 		//If probability = 1, then good request. If probability = 2, then bad request.
-		if(verdict!=1) {
+		if(verdictGroundTruth==1) {
+			numGood++;
+			flag = true;
+		}
+		else {
+			flag = false;
+			numBad++;
+		}
+		int verdictClassifier = rand.nextInt((int) (10))+1;
+		if(flag && verdictClassifier!=1) {
 			classGood++;
 		}
 		else {
 			classBad++;
 		}
-		
 		excess = classGood - (e*x);
 		total = Math.sqrt(x*Math.log(y));
 		
@@ -76,6 +85,9 @@ public static void main(String[] args) {
 	System.out.println("==== Execution completed ====");
 	System.out.println("Request classified as good: "+(numGood+numBad-classBad));
 	System.out.println("Request classified as bad: "+classBad);
+	System.out.println("Request truly good: "+(numGood));
+	System.out.println("Request truly bad: "+(numBad));
+
 	System.out.println("Good cost: "+goodCost+" Bad cost: "+(badCost*numGood));
 	
 }
