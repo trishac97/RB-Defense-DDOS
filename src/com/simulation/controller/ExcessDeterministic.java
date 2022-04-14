@@ -2,7 +2,7 @@ package com.simulation.controller;
 
 import java.util.Random;
 
-public class ExcessV5{
+public class ExcessDeterministic{
 public static void main(String[] args) {
 	
 	
@@ -32,12 +32,10 @@ public static void main(String[] args) {
 		if(verdictGroundTruth==1) {
 			numGood++;
 			isGood = true;
-			goodCost+=Math.sqrt(x);
 		}
 		else {
-			isGood = false;
 			numBad++;
-			badCost+=Math.sqrt(x);
+			isGood = false;
 
 		}
 		int verdictClassifier = rand.nextInt((int) (10))+1;
@@ -62,19 +60,13 @@ public static void main(String[] args) {
 		
 		//Check if window ends
 		if(excess>total) {
-			
-//			System.out.println("~~~~~~~~~~Ending window~~~~~~~~~~~~~");
-//			System.out.println("Total request seen: "+y);				
-//			System.out.println("Request seen in a window: "+x);				
-//			System.out.println("ClassGood: "+classGood);
-//			System.out.println("ClassBad: "+classBad);
-			
-//			for(int i=1;i<=(int) (x-total);i++) {
-//				badCost+=Math.sqrt(i);
-//			}
-//			for(int i=(int) (x-total);i<=x;i++) {
-//				goodCost+=Math.sqrt(i);
-//			}
+						
+			for(int i=1;i<=(int) (x-total);i++) {
+				badCost+=Math.sqrt(i);
+			}
+			for(int i=(int) (x-total);i<=x;i++) {
+				goodCost+=Math.sqrt(i);
+			}
 			//Reset the parameters for next window
 			x = 0; 
 			classGood = 0;
@@ -87,13 +79,13 @@ public static void main(String[] args) {
 	//Sometimes the last window never closes as we don't see anymore request
 	if(excess<=total) {
 //		System.out.println("#### Last Window Open ####");
-//		for(int i=1;i<(int) (x-total);i++) {
-//			badCost+=Math.sqrt(i);
-//		}
-//		
-//		for(int i=(int) (x-total);i<=x;i++) {
-//			goodCost+=Math.sqrt(i);
-//		}
+		for(int i=1;i<(int) (x-total);i++) {
+			badCost+=Math.sqrt(i);
+		}
+		
+		for(int i=(int) (x-total);i<=x;i++) {
+			goodCost+=Math.sqrt(i);
+		}
 	}
 	
 //	System.out.println("==== Execution completed ====");

@@ -2,7 +2,7 @@ package com.simulation.controller;
 
 import java.util.Random;
 
-public class ExcessV5{
+public class ExcessRandom{
 public static void main(String[] args) {
 	
 	
@@ -63,18 +63,13 @@ public static void main(String[] args) {
 		//Check if window ends
 		if(excess>total) {
 			
-//			System.out.println("~~~~~~~~~~Ending window~~~~~~~~~~~~~");
-//			System.out.println("Total request seen: "+y);				
-//			System.out.println("Request seen in a window: "+x);				
-//			System.out.println("ClassGood: "+classGood);
-//			System.out.println("ClassBad: "+classBad);
+			System.out.println("~~~~~~~~~~Ending window~~~~~~~~~~~~~");
+			System.out.println("Total request seen: "+y);				
+			System.out.println("Request seen in a window: "+x);				
+			System.out.println("ClassGood: "+classGood);
+			System.out.println("ClassBad: "+classBad);
 			
-//			for(int i=1;i<=(int) (x-total);i++) {
-//				badCost+=Math.sqrt(i);
-//			}
-//			for(int i=(int) (x-total);i<=x;i++) {
-//				goodCost+=Math.sqrt(i);
-//			}
+
 			//Reset the parameters for next window
 			x = 0; 
 			classGood = 0;
@@ -83,24 +78,12 @@ public static void main(String[] args) {
 		}
 		
 	}
-	
-	//Sometimes the last window never closes as we don't see anymore request
-	if(excess<=total) {
-//		System.out.println("#### Last Window Open ####");
-//		for(int i=1;i<(int) (x-total);i++) {
-//			badCost+=Math.sqrt(i);
-//		}
-//		
-//		for(int i=(int) (x-total);i<=x;i++) {
-//			goodCost+=Math.sqrt(i);
-//		}
-	}
-	
-//	System.out.println("==== Execution completed ====");
-//	System.out.println("Request classified as good: "+(numGood+numBad-classBad));
-//	System.out.println("Request classified as bad: "+classBad);
-//	System.out.println("Request truly good: "+(numGood));
-//	System.out.println("Request truly bad: "+(numBad));
+		
+	System.out.println("==== Execution completed ====");
+	System.out.println("Request classified as good: "+(numGood+numBad-classBad));
+	System.out.println("Request classified as bad: "+classBad);
+	System.out.println("Request truly good: "+(numGood));
+	System.out.println("Request truly bad: "+(numBad));
 
 	System.out.println("Good cost: "+goodCost+" Bad cost: "+(badCost*numGood));
 	
