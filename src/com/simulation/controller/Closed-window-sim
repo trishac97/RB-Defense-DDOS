@@ -1,0 +1,12 @@
+ExcessClosed.java
+
+Assume, we see y = 10000000 total jobs incoming in the system. 
+Define a adversarial situation: At the beginning of every window, adversary pushes n jobs where n = 10,20,30,... 
+As per the excess calculation, the window won't close without seeing good jobs. So, those last few good jobs in a window will face the hardest puzzles.
+
+Algorithm cost : Provisioning cost (good and bad) + resource burning cost of good jobs.
+Bad cost : Resource burning cost of bad jobs.
+
+I didn't reset classGood when i-th window closed as the plot for this shows weird trend, algorithm cost increases and decreases.
+The quadratic advantage is over all the windows together (per execution).
+ 

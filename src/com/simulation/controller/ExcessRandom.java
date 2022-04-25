@@ -20,7 +20,7 @@ public static void main(String[] args) {
 	float goodCost = 0;			//Good Cost
 	float badCost = 0;			//Bad Cost
 	
-	for(int ratio = 2; ratio<15;ratio++) {
+	for(int ratio = 2; ratio<10;ratio++) {
 	
 	for(int y = 1; y<totalGoodBad;y++) {
 		//Incoming new request, increment x by 1
@@ -61,15 +61,9 @@ public static void main(String[] args) {
 		total = 9*Math.sqrt(x*Math.log(y));
 		
 		//Check if window ends
-		if(excess>total) {
+		if(excess>total) {		
+			//System.out.println("closes");
 			
-			System.out.println("~~~~~~~~~~Ending window~~~~~~~~~~~~~");
-			System.out.println("Total request seen: "+y);				
-			System.out.println("Request seen in a window: "+x);				
-			System.out.println("ClassGood: "+classGood);
-			System.out.println("ClassBad: "+classBad);
-			
-
 			//Reset the parameters for next window
 			x = 0; 
 			classGood = 0;
@@ -79,13 +73,16 @@ public static void main(String[] args) {
 		
 	}
 		
-	System.out.println("==== Execution completed ====");
-	System.out.println("Request classified as good: "+(numGood+numBad-classBad));
-	System.out.println("Request classified as bad: "+classBad);
-	System.out.println("Request truly good: "+(numGood));
-	System.out.println("Request truly bad: "+(numBad));
-
-	System.out.println("Good cost: "+goodCost+" Bad cost: "+(badCost*numGood));
+	System.out.println(goodCost+" "+(badCost*numGood));
+	x = 0;
+	excess = 0;
+	total = 0;
+	goodCost = 0;
+	badCost = 0;
+	numGood = 0;
+	numBad = 0;
+	classGood = 0;
+	classBad = 0;
 	
 }
 }
